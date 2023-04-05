@@ -60,12 +60,18 @@ public class MainFrame extends JFrame {
         this.pack();
     }
 
-    public void unsuccessfulLogin(){
-        // TODO
+    public void emptyValueInputError(){
+        JOptionPane.showMessageDialog(this, "You cannot set your username or password empty!", "EmptyValueInputError", JOptionPane.ERROR_MESSAGE);
+    }
+    public void defaultValueInputError(){
+        JOptionPane.showMessageDialog(this, "You cannot set your username and password as their default value!", "DefaultValueInputError", JOptionPane.ERROR_MESSAGE);
+    }
+    public void unsuccessfulLoginError(){
+        JOptionPane.showMessageDialog(this, "Username or password is not correct!", "UnsuccessfulLoginError", JOptionPane.ERROR_MESSAGE);
     }
 
-    public void unsuccessfulRegister(){
-        // TODO
+    public void unsuccessfulRegisterError(){
+        JOptionPane.showMessageDialog(this, "This username is taken. Please try another username.", "UnsuccessfulRegisterError", JOptionPane.ERROR_MESSAGE);
     }
 
     public static int getGameWidth() {
