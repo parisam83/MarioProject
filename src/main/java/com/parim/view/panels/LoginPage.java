@@ -14,6 +14,7 @@ public class LoginPage extends AccountPage{
 
     @Override
     public void listener(UserFormEvent userFormEvent) {
-        new LoginListener().eventOccurred(userFormEvent);
+        if (!super.isDefaultValue())
+            new LoginListener().eventOccurred(userFormEvent);
     }
 }

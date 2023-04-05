@@ -14,6 +14,7 @@ public class RegisterPage extends AccountPage{
 
     @Override
     public void listener(UserFormEvent userFormEvent) {
-        new RegistrationListener().eventOccurred(userFormEvent);
+        if (!super.isDefaultValue())
+            new RegistrationListener().eventOccurred(userFormEvent);
     }
 }
