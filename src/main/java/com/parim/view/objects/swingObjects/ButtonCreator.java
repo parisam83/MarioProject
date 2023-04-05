@@ -20,12 +20,13 @@ public class ButtonCreator extends JButton {
         createButton();
     }
     public ButtonCreator(int y, String text, boolean nextButton){
+        if (nextButton) nextButton();
         this.x = MainFrame.getGameWidth()/2 - buttonWidth/2;
         this.y = y;
         this.buttonWidth = normalButtonWidth;
         this.buttonHeight = normalButtonHeight;
-        this.text = text;
         if (nextButton) nextButton();
+        this.text = text;
         createButton();
     }
     public ButtonCreator(int x, int y, String text, boolean nextButton){
