@@ -1,4 +1,4 @@
-package com.parim.view.objects;
+package com.parim.view.objects.swingObjects;
 
 import com.parim.view.MainFrame;
 import com.parim.view.loaders.FontLoader;
