@@ -39,6 +39,10 @@ public abstract class AccountPage extends JPanel {
             MainFrame.getInstance().defaultValueInputError();
             return true;
         }
+        else if (username.getText().equals("") || password.getText().equals("")) {
+            MainFrame.getInstance().emptyValueInputError();
+            return true;
+        }
         return false;
     }
     public abstract void setLabel();
