@@ -63,4 +63,17 @@ public class ButtonCreator extends JButton {
         this.buttonWidth = nextButtonWidth;
         this.buttonHeight = nextButtonHeight;
     }
+
+    public static int getNextButtonWidth() {
+        return nextButtonWidth;
+    }
+    public static int getNextButtonHeight() {
+        return nextButtonHeight;
+    }
+    public static int getNormalButtonWidth() {
+        return normalButtonWidth;
+    }
+    public static int getNormalButtonHeight() {
+        return normalButtonHeight;
+    }
 }
