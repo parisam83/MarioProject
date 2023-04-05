@@ -12,12 +12,15 @@ public class User {
     private ArrayList<Game> savedGames = new ArrayList<>();
     private ArrayList<Character> characters = new ArrayList<Character>(){{add(Character.Xayyat);}};
 
-    public User(String username, String password){
-        id = UserAccess.numberOfUsers();
+    public User(int id, String username, String password){
+        this.id = id;
         this.username = username;
         this.password = password;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getUsername() {
         return username;
     }
