@@ -35,7 +35,11 @@ public abstract class AccountPage extends JPanel {
     }
 
     public boolean isDefaultValue(){
-        return username.getText().equals("username") && password.getText().equals("password");
+        if (username.getText().equals("username") && password.getText().equals("password")){
+            MainFrame.getInstance().defaultValueInputError();
+            return true;
+        }
+        return false;
     }
     public abstract void setLabel();
     public abstract void listener(UserFormEvent userFormEvent);
