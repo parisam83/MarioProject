@@ -15,11 +15,11 @@ public class FirstPage extends JPanel {
         this.add(label);
 
         ButtonCreator registerButton = new ButtonCreator(buttonLabelGap, "Register", false);
-        // TODO: registerButton.addActionListener(e -> MainFrame.getInstance().setRegisterPage());
+        registerButton.addActionListener(e -> MainFrame.getInstance().setRegisterPage());
         this.add(registerButton);
 
         ButtonCreator loginButton = new ButtonCreator(buttonLabelGap + buttonGap, "Login", false);
-        // TODO: loginButton.addActionListener(e -> MainFrame.getInstance().setLoginPage());
+        loginButton.addActionListener(e -> MainFrame.getInstance().setLoginPage());
         this.add(loginButton);
 
         ButtonCreator exitButton = new ButtonCreator(buttonLabelGap + buttonGap*2, "Exit", false);
