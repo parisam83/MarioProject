@@ -26,7 +26,7 @@ public class UserAccess {
     }
     public void add(User user){
         try {
-            FileWriter writer = new FileWriter(directory + "/user" + user.getId() + ".json");
+            FileWriter writer = new FileWriter(directory + "/user" + String.valueOf(user.getId()) + ".json");
             gson.toJson(user, writer);
             writer.flush();
         } catch (IOException e) {
