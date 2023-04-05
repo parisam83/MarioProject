@@ -11,7 +11,7 @@ public class UserAccess {
     private final String directory = "database";
     private final File databaseFile = new File(directory);
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private ArrayList<User> users;
+    private ArrayList<User> users = new ArrayList<>();
 
     private void read(){
         for (int i = 1; i <= numberOfUsers(); i++) {
