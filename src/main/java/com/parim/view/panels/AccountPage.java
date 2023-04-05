@@ -1,5 +1,6 @@
 package com.parim.view.panels;
 
+import com.parim.event.UserFormEvent;
 import com.parim.view.MainFrame;
 import com.parim.view.objects.swingObjects.ButtonCreator;
 import com.parim.view.objects.swingObjects.LabelCreator;
@@ -22,7 +23,7 @@ public abstract class AccountPage extends JPanel {
         this.add(password);
 
         ButtonCreator nextButton = new ButtonCreator(MainFrame.getGameWidth()/2 + 300, textFieldLabelGap + textFieldGap*7/3, ButtonCreator.getNextButtonWidth(), ButtonCreator.getNextButtonHeight(), ">> Next >>", true);
-        nextButton.addActionListener(e -> validInput());
+        nextButton.addActionListener(e -> listener(new UserFormEvent(username.getText(), password.getText())));
         this.add(nextButton);
 
         ButtonCreator backButton = new ButtonCreator(MainFrame.getGameWidth()/2 - 300 - ButtonCreator.getNextButtonWidth(), textFieldLabelGap + textFieldGap*7/3, ButtonCreator.getNextButtonWidth(), ButtonCreator.getNextButtonHeight(), "<< Back <<", true);
@@ -37,5 +38,5 @@ public abstract class AccountPage extends JPanel {
         return username.getText().equals("username") && password.getText().equals("password");
     }
     public abstract void setLabel();
-    public abstract void validInput();
+    public abstract void listener(UserFormEvent userFormEvent);
 }
