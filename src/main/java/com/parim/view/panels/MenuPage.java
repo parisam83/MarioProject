@@ -30,7 +30,7 @@ public class MenuPage extends JPanel {
         this.add(shopButton);
 
         ButtonCreator profileButton = new ButtonCreator(MainFrame.getGameWidth()/2 + 100, buttonLabelGap + (buttonGap), "Profile", false);
-        // TODO: profileButton.addActionListener(e -> ...);
+        profileButton.addActionListener(e -> MainFrame.getInstance().setProfilePage());
         this.add(profileButton);
 
         ButtonCreator backButton = new ButtonCreator(buttonLabelGap + (buttonGap)*3-10, "<< Back <<", true);
