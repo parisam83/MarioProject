@@ -30,6 +30,8 @@ public class LabelCreator extends JLabel {
         this.setText(text);
         this.setFont(font);
         this.setBounds(x, y, MainFrame.getGameWidth(), MainFrame.getGameHeight());
+        if (font != FontLoader.titleFont)
+            this.setBounds(x, y, 200, 100);
         this.setVerticalAlignment(JLabel.TOP);
         this.setHorizontalAlignment(JLabel.CENTER);
     }
