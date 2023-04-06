@@ -54,4 +54,8 @@ public class User {
     public int getMaxScore() {
         return maxScore;
     }
+
+    public Character getCurrentCharacter() {
+        return currentCharacter;
+    }
 }
