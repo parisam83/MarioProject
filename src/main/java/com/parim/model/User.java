@@ -58,4 +58,12 @@ public class User {
     public Character getCurrentCharacter() {
         return currentCharacter;
     }
+
+    public ArrayList<Character> getCharacters() {
+        return characters;
+    }
+
+    public ArrayList<Game> getSavedGames() {
+        return savedGames;
+    }
 }
