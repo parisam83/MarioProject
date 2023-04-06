@@ -1,10 +1,7 @@
 package com.parim.view;
 
 import com.parim.model.User;
-import com.parim.view.panels.FirstPage;
-import com.parim.view.panels.MenuPage;
-import com.parim.view.panels.LoginPage;
-import com.parim.view.panels.RegisterPage;
+import com.parim.view.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +13,7 @@ public class MainFrame extends JFrame {
     private LoginPage loginPage;
     private RegisterPage registerPage;
     private MenuPage menuPage;
+    private ProfilePage profilePage = new ProfilePage(user);
     private static final int gameWidth = 1500, gameHeight = 832;
     private static final Dimension screenSize = new Dimension(gameWidth, gameHeight);
 
@@ -57,6 +55,12 @@ public class MainFrame extends JFrame {
     public void setGamePage(){
         menuPage = new MenuPage();
         this.setContentPane(menuPage);
+        this.pack();
+    }
+    public void setProfilePage(){
+        if (profilePage.getUser() != user)
+            profilePage = new ProfilePage(user);
+        this.setContentPane(profilePage);
         this.pack();
     }
 
