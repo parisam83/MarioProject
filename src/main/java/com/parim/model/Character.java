@@ -2,28 +2,25 @@ package com.parim.model;
 
 import com.parim.view.loaders.ImageLoader;
 
-import javax.swing.*;
-
 public enum Character {
-    Xayyat(0, new ImageLoader("Xayyat.png").getIcon()),
-    Frog(100, new ImageLoader("Frog.png").getIcon()), // jump
-    MigMig(200, new ImageLoader("MigMig.png").getIcon()), // fast
-    Woman(300, new ImageLoader("Woman.png").getIcon()), // coin
-    RobinHood(400, new ImageLoader("RobinHood.png").getIcon()) // shot
+    Xayyat(0, new ImageLoader("Xayyat.png")),
+    Frog(100, new ImageLoader("Frog.png")), // jump
+    MigMig(200, new ImageLoader("MigMig.png")), // fast
+    Woman(750, new ImageLoader("Woman.png")), // coin
+    RobinHood(400, new ImageLoader("RobinHood.png")) // shot
     ;
 
     private final int price;
-    private final ImageIcon imageIcon;
-    Character(int price, ImageIcon imageIcon){
+    private final ImageLoader picture;
+    Character(int price, ImageLoader picture){
         this.price = price;
-        this.imageIcon = imageIcon;
+        this.picture = picture;
     }
 
     public int getPrice() {
         return price;
     }
-
-    public ImageIcon getImageIcon() {
-        return imageIcon;
+    public ImageLoader getPicture() {
+        return picture;
     }
 }
