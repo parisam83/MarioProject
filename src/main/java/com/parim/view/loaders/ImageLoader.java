@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ImageLoader {
     private final Image picture;
 
-    ImageLoader(String name){
+    public ImageLoader(String name){
         {
             try {
                 picture = ImageIO.read(new File("src/main/resources/characters/" + name));
