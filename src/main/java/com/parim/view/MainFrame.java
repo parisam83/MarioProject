@@ -13,7 +13,8 @@ public class MainFrame extends JFrame {
     private LoginPage loginPage;
     private RegisterPage registerPage;
     private MenuPage menuPage;
-    private ProfilePage profilePage = new ProfilePage(user);
+    private ProfilePage profilePage;
+    private ShopPage shopPage;
     private static final int gameWidth = 1500, gameHeight = 832;
     private static final Dimension screenSize = new Dimension(gameWidth, gameHeight);
 
@@ -58,9 +59,16 @@ public class MainFrame extends JFrame {
         this.pack();
     }
     public void setProfilePage(){
-        if (profilePage.getUser() != user)
+        if (profilePage == null || profilePage.getUser() != user)
             profilePage = new ProfilePage(user);
         this.setContentPane(profilePage);
+        this.pack();
+    }
+
+    public void setShopPage(){
+        if (shopPage == null || shopPage.getUser() != user)
+            shopPage = new ShopPage(user);
+        this.setContentPane(shopPage);
         this.pack();
     }
 
