@@ -13,7 +13,6 @@ public class ProfilePage extends JPanel {
     private static final int buttonLabelGap = 200, buttonGap = 80;
     public ProfilePage(User user){
         this.user = user;
-        if (user == null) return;
 
         LabelCreator label = new LabelCreator("Profile page!");
         this.add(label);
