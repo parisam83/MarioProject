@@ -69,6 +69,8 @@ public class ButtonCreator extends JButton {
         this.setFont(font);
         this.setBounds(x, y, buttonWidth, buttonHeight);
         this.setFocusable(false);
+        this.setHorizontalTextPosition(JButton.CENTER);
+        this.setVerticalTextPosition(JButton.BOTTOM);
     }
     public void nextButton(){
         this.buttonWidth = nextButtonWidth;
