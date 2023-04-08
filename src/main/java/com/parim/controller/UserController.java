@@ -4,9 +4,12 @@ import com.parim.access.UserAccess;
 import com.parim.event.UserFormEvent;
 import com.parim.model.User;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class UserController {
-    private final UserFormEvent userFormEvent;
-    private final UserAccess userAccess = new UserAccess();
+    private UserFormEvent userFormEvent;
+    private final static UserAccess userAccess = new UserAccess();
 
     public UserController(UserFormEvent userFormEvent){
         this.userFormEvent = userFormEvent;
@@ -23,5 +26,11 @@ public class UserController {
 
     public User loginUser(){
         return userAccess.findUser(userFormEvent.getUsername(), userFormEvent.getPassword());
+    }
+
+    public static ArrayList<User> getAllUsersSorted(){
+        ArrayList<User> users = userAccess.getUsers();
+        users.sort(Comparator.comparing(User::getMaxScore));
+        return users;
     }
 }

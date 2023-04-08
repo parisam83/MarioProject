@@ -14,6 +14,7 @@ public class UserAccess {
     private ArrayList<User> users = new ArrayList<>();
 
     private void read(){
+        users.clear();
         for (int i = 1; i <= numberOfUsers(); i++) {
             FileReader reader;
             try {
@@ -52,5 +53,10 @@ public class UserAccess {
         if (databaseFile.list() == null)
             return 0;
         return databaseFile.list().length;
+    }
+
+    public ArrayList<User> getUsers() {
+        read();
+        return users;
     }
 }
