@@ -19,6 +19,12 @@ public class LabelCreator extends JLabel {
         this.font = font;
         createLabel();
     }
+    public LabelCreator(int y, String text, Font font){
+        this.y = y;
+        this.text = text;
+        this.font = font;
+        createLabel();
+    }
     public LabelCreator(int x, int y, String text, Font font){
         this.x = x;
         this.y = y;
@@ -30,9 +36,8 @@ public class LabelCreator extends JLabel {
         this.setText(text);
         this.setFont(font);
         this.setBounds(x, y, MainFrame.getGameWidth(), MainFrame.getGameHeight());
-        if (font != FontLoader.titleFont)
-            this.setBounds(x, y, 200, 100);
         this.setVerticalAlignment(JLabel.TOP);
         this.setHorizontalAlignment(JLabel.CENTER);
+        if (text.contains("Coins:")) this.setHorizontalAlignment(JLabel.LEFT);
     }
 }
