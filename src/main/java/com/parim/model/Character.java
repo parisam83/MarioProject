@@ -4,10 +4,10 @@ import com.parim.view.loaders.ImageLoader;
 
 public enum Character {
     Xayyat(0, new ImageLoader("Xayyat.png")),
-    Frog(100, new ImageLoader("Frog.png")), // jump
-    MigMig(200, new ImageLoader("MigMig.png")), // fast
+    Frog(90, new ImageLoader("Frog.png")), // jump
+    MigMig(230, new ImageLoader("MigMig.png")), // fast
     Woman(750, new ImageLoader("Woman.png")), // coin
-    RobinHood(400, new ImageLoader("RobinHood.png")) // shot
+    RobinHood(410, new ImageLoader("RobinHood.png")) // shot
     ;
 
     private final int price;
