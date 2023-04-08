@@ -1,7 +1,5 @@
 package com.parim.model;
 
-import com.parim.access.UserAccess;
-
 import java.util.ArrayList;
 
 public class User {
@@ -28,7 +26,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public void changeCharacter(Character character){
+    public void setCurrentCharacter(Character character){
         this.currentCharacter = character;
     }
     public void addCharacter(Character character){
