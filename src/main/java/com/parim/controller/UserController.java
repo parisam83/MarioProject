@@ -8,7 +8,7 @@ public class UserController {
     private final UserFormEvent userFormEvent;
     private final UserAccess userAccess = new UserAccess();
 
-    public  UserController(UserFormEvent userFormEvent){
+    public UserController(UserFormEvent userFormEvent){
         this.userFormEvent = userFormEvent;
     }
 
