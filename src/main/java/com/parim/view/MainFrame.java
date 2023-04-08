@@ -59,8 +59,7 @@ public class MainFrame extends JFrame {
         this.pack();
     }
     public void setProfilePage(){
-        if (profilePage == null || profilePage.getUser() != user)
-            profilePage = new ProfilePage(user);
+        profilePage = new ProfilePage(user);
         this.setContentPane(profilePage);
         this.pack();
     }
@@ -72,6 +71,9 @@ public class MainFrame extends JFrame {
         this.pack();
     }
 
+    public void addOptionPane(String message){
+        JOptionPane.showMessageDialog(this, message, "Message", JOptionPane.INFORMATION_MESSAGE);
+    }
     public void emptyValueInputError(){
         JOptionPane.showMessageDialog(this, "You cannot set your username or password empty!", "EmptyValueInputError", JOptionPane.ERROR_MESSAGE);
     }
