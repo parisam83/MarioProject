@@ -18,22 +18,16 @@ public class ProfilePage extends JPanel {
         this.add(label);
 
         // Username
-        LabelCreator usernameLabel = new LabelCreator(MainFrame.getGameWidth()/2 - 200, buttonLabelGap, "Username: ", FontLoader.buttonFont);
-        LabelCreator usernameData = new LabelCreator(MainFrame.getGameWidth()/2 - 110, buttonLabelGap, user.getUsername(), FontLoader.buttonFont);
+        LabelCreator usernameLabel = new LabelCreator(buttonLabelGap, "Username: " + user.getUsername(), FontLoader.buttonFont);
         this.add(usernameLabel);
-        this.add(usernameData);
 
         // Character
-        LabelCreator characterLabel = new LabelCreator(MainFrame.getGameWidth()/2 - 200, buttonLabelGap + buttonGap, "Character: ", FontLoader.buttonFont);
-        LabelCreator characterData = new LabelCreator(MainFrame.getGameWidth()/2 - 85, buttonLabelGap + buttonGap, user.getCurrentCharacter().toString(), FontLoader.buttonFont);
+        LabelCreator characterLabel = new LabelCreator(buttonLabelGap + buttonGap, "Character: " + user.getCurrentCharacter().toString(), FontLoader.buttonFont);
         this.add(characterLabel);
-        this.add(characterData);
 
         // MaxScore
-        LabelCreator maxScoreLabel = new LabelCreator(MainFrame.getGameWidth()/2 - 200, buttonLabelGap + buttonGap*2, "Max Score: ", FontLoader.buttonFont);
-        LabelCreator maxScoreData = new LabelCreator(MainFrame.getGameWidth()/2 - 100, buttonLabelGap + buttonGap*2, String.valueOf(user.getMaxScore()), FontLoader.buttonFont);
+        LabelCreator maxScoreLabel = new LabelCreator(buttonLabelGap + buttonGap*2, "Max Score: " + String.valueOf(user.getMaxScore()), FontLoader.buttonFont);
         this.add(maxScoreLabel);
-        this.add(maxScoreData);
 
         ButtonCreator backButton = new ButtonCreator(MainFrame.getGameWidth()/2 - ButtonCreator.getNextButtonWidth()/2, 230 + 180*7/3, ButtonCreator.getNextButtonWidth(), ButtonCreator.getNextButtonHeight(), "<< Back <<", true);
         backButton.addActionListener(e -> MainFrame.getInstance().setGamePage());
