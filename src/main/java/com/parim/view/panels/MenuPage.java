@@ -22,7 +22,7 @@ public class MenuPage extends JPanel {
         this.add(prevGameButton);
 
         ButtonCreator leaderBoardButton = new ButtonCreator(buttonLabelGap + (buttonGap)*2, "Leaderboard", false);
-        // TODO: leaderBoardButton.addActionListener(e -> ...);
+        leaderBoardButton.addActionListener(e -> MainFrame.getInstance().setLeaderBoardPage());
         this.add(leaderBoardButton);
 
         ButtonCreator shopButton = new ButtonCreator(MainFrame.getGameWidth()/2 + 100, buttonLabelGap, "Shop", false);

@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
     private MenuPage menuPage;
     private ProfilePage profilePage;
     private ShopPage shopPage;
+    private LeaderBoardPage leaderBoardPage;
     private static final int gameWidth = 1500, gameHeight = 832;
     private static final Dimension screenSize = new Dimension(gameWidth, gameHeight);
 
@@ -68,6 +69,12 @@ public class MainFrame extends JFrame {
         if (shopPage == null || shopPage.getUser() != user)
             shopPage = new ShopPage(user);
         this.setContentPane(shopPage);
+        this.pack();
+    }
+
+    public void setLeaderBoardPage(){
+        leaderBoardPage = new LeaderBoardPage();
+        this.setContentPane(leaderBoardPage);
         this.pack();
     }
 
