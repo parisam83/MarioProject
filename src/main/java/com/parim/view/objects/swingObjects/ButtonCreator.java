@@ -53,12 +53,13 @@ public class ButtonCreator extends JButton {
         if (nextButton) nextButton();
         createButton();
     }
-    public ButtonCreator(int x, int y, int buttonWidth, int buttonHeight, String text, boolean nextButton, ImageIcon image){
+    public ButtonCreator(int x, int y, int buttonWidth, int buttonHeight, String text, boolean nextButton, ImageIcon image, Font font){
         this.x = x;
         this.y = y;
         this.text = text;
         this.buttonWidth = buttonWidth;
         this.buttonHeight = buttonHeight;
+        this.font = font;
         if (nextButton) nextButton();
         createButton();
         this.setIcon(image);
