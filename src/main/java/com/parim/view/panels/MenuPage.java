@@ -6,6 +6,8 @@ import com.parim.view.objects.swingObjects.ButtonCreator;
 import com.parim.view.objects.swingObjects.LabelCreator;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MenuPage extends JPanel {
     private static final int buttonLabelGap = 180, buttonGap = 170;
@@ -14,11 +16,11 @@ public class MenuPage extends JPanel {
         this.add(label);
 
         ButtonCreator newGameButton = new ButtonCreator(MainFrame.getGameWidth()/2 - 100 - ButtonCreator.getNormalButtonWidth(), buttonLabelGap, "Start new game", false);
-        // TODO: newGameButton.addActionListener(e -> ...);
+        newGameButton.addActionListener(e -> MainFrame.getInstance().setNewGamePage());
         this.add(newGameButton);
 
         ButtonCreator prevGameButton = new ButtonCreator(MainFrame.getGameWidth()/2 - 100 - ButtonCreator.getNormalButtonWidth(), buttonLabelGap + (buttonGap), "Continue previous games", FontLoader.font.deriveFont(35f), false);
-        // TODO: prevGameButton.addActionListener(e -> ...);
+        prevGameButton.addActionListener(e -> MainFrame.getInstance().setPreviousGamePage());
         this.add(prevGameButton);
 
         ButtonCreator leaderBoardButton = new ButtonCreator(buttonLabelGap + (buttonGap)*2, "Leaderboard", false);

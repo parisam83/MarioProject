@@ -1,5 +1,6 @@
 package com.parim.view;
 
+import com.parim.model.Game;
 import com.parim.model.User;
 import com.parim.view.panels.*;
 
@@ -16,6 +17,9 @@ public class MainFrame extends JFrame {
     private ProfilePage profilePage;
     private ShopPage shopPage;
     private LeaderBoardPage leaderBoardPage;
+    private NewGamePage newGamePage;
+    private PreviousGamePage previousGamePage;
+    private GamePage gamePage;
     private static final int gameWidth = 1500, gameHeight = 832;
     private static final Dimension screenSize = new Dimension(gameWidth, gameHeight);
 
@@ -68,6 +72,21 @@ public class MainFrame extends JFrame {
     public void setLeaderBoardPage(){
         leaderBoardPage = new LeaderBoardPage();
         setPage(leaderBoardPage);
+    }
+
+    public void setNewGamePage() {
+        newGamePage = new NewGamePage(user);
+        setPage(newGamePage);
+    }
+
+    public void setPreviousGamePage() {
+        previousGamePage = new PreviousGamePage(user);
+        setPage(previousGamePage);
+    }
+
+    public void setGamePage(Game game){
+        gamePage = new GamePage(game);
+        setPage(gamePage);
     }
 
     private void setPage(JPanel panel){
