@@ -23,7 +23,7 @@ public class ShopPage extends JPanel {
         this.add(label);
 
         ButtonCreator backButton = new ButtonCreator(MainFrame.getGameWidth()/2 - ButtonCreator.getNextButtonWidth()/2, 290 + 180*7/3, ButtonCreator.getNextButtonWidth(), ButtonCreator.getNextButtonHeight(), "<< Back <<", true);
-        backButton.addActionListener(e -> MainFrame.getInstance().setGamePage());
+        backButton.addActionListener(e -> MainFrame.getInstance().setMenuPage());
         this.add(backButton);
 
         coins = new LabelCreator(5, 10, "Coins: " + user.getCoins(), FontLoader.font.deriveFont(35f));
@@ -49,8 +49,6 @@ public class ShopPage extends JPanel {
     public void setButtons(int smallIndex, String message){
         coins.setText("Coins: " + user.getCoins());
         if (!message.contains("successfully")) return;
-        System.out.println(shopButtons[0].getCharacter().name() + "   " + shopButtons[smallIndex].getCharacter().name());
-        System.out.println(shopButtons[0].getActionListeners().length + "   " + shopButtons[smallIndex].getActionListeners().length);
         ShopButtonCreator.swapButtons(shopButtons[0], shopButtons[smallIndex]);
     }
 

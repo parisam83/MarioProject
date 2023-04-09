@@ -30,7 +30,7 @@ public class ProfilePage extends JPanel {
         this.add(maxScoreLabel);
 
         ButtonCreator backButton = new ButtonCreator(MainFrame.getGameWidth()/2 - ButtonCreator.getNextButtonWidth()/2, 230 + 180*7/3, ButtonCreator.getNextButtonWidth(), ButtonCreator.getNextButtonHeight(), "<< Back <<", true);
-        backButton.addActionListener(e -> MainFrame.getInstance().setGamePage());
+        backButton.addActionListener(e -> MainFrame.getInstance().setMenuPage());
         this.add(backButton);
 
         this.setLayout(null);

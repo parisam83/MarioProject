@@ -13,7 +13,7 @@ public class RegistrationListener implements FormListener{
             MainFrame.getInstance().unsuccessfulRegisterError();
         else{
             MainFrame.setUser(user);
-            MainFrame.getInstance().setGamePage();
+            MainFrame.getInstance().setMenuPage();
         }
     }
 }

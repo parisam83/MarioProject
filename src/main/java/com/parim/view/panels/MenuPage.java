@@ -37,7 +37,6 @@ public class MenuPage extends JPanel {
         backButton.addActionListener(e -> MainFrame.getInstance().setFirstPage());
         this.add(backButton);
 
-
         this.setLayout(null);
         this.setPreferredSize(MainFrame.getScreenSize());
     }
