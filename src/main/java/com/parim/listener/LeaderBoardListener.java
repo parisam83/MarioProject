@@ -9,8 +9,12 @@ public class LeaderBoardListener {
     public static Object[][] getAllUsers(){
         ArrayList<User> users = UserController.getAllUsersSorted();
         Object[][] finalUsers = new Object[users.size()][4];
-        for (int i = 0; i < users.size(); i++)
-            finalUsers[i] = new Object[]{i+1, users.get(i).getUsername(), users.get(i).getMaxScore()};
+
+        int index = 0;
+        for (int i = 0; i < users.size(); i++) {
+            if (!(i > 0 && users.get(i).getMaxScore() == users.get(i - 1).getMaxScore())) index++;
+            finalUsers[i] = new Object[]{index, users.get(i).getUsername(), users.get(i).getMaxScore()};
+        }
         return finalUsers;
     }
 }
