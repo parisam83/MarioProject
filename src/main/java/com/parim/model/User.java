@@ -32,10 +32,9 @@ public class User {
     public void addCharacter(Character character){
         this.characters.add(character);
     }
-    public void addGame(Game game){
-        if (savedGames.size() == 3)
-            savedGames.remove(0);
-        savedGames.add(game);
+    public void addGame(Game gameToDelete, Game gameToAdd){
+        if (gameToDelete != null) savedGames.remove(gameToDelete);
+        savedGames.add(gameToAdd);
     }
     public void addCoins(int coins){
         this.coins += coins;
