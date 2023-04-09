@@ -30,7 +30,7 @@ public class UserController {
 
     public static ArrayList<User> getAllUsersSorted(){
         ArrayList<User> users = userAccess.getUsers();
-        users.sort(Comparator.comparing(User::getMaxScore));
+        users.sort(Comparator.comparing(User::getMaxScore).reversed());
         return users;
     }
 }
