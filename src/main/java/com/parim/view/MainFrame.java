@@ -23,10 +23,9 @@ public class MainFrame extends JFrame {
         instance = this;
         this.setTitle("Super Xayyati Game!");
         this.setSize(screenSize);
+        //this.setPreferredSize(screenSize);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
         this.setFirstPage();
     }
 
@@ -40,42 +39,44 @@ public class MainFrame extends JFrame {
 
     public void setFirstPage(){
         if (firstPage == null) firstPage = new FirstPage();
-        this.setContentPane(firstPage);
-        this.pack();
+        setPage(firstPage);
     }
 
     public void setLoginPage() {
         loginPage = new LoginPage();
-        this.setContentPane(loginPage);
-        this.pack();
+        setPage(loginPage);
     }
     public void setRegisterPage() {
         registerPage = new RegisterPage();
-        this.setContentPane(registerPage);
-        this.pack();
+        setPage(registerPage);
     }
-    public void setGamePage(){
+    public void setMenuPage(){
         menuPage = new MenuPage();
-        this.setContentPane(menuPage);
-        this.pack();
+        setPage(menuPage);
     }
     public void setProfilePage(){
         profilePage = new ProfilePage(user);
-        this.setContentPane(profilePage);
-        this.pack();
+        setPage(profilePage);
     }
 
     public void setShopPage(){
         if (shopPage == null || shopPage.getUser() != user)
             shopPage = new ShopPage(user);
-        this.setContentPane(shopPage);
-        this.pack();
+        setPage(shopPage);
     }
 
     public void setLeaderBoardPage(){
         leaderBoardPage = new LeaderBoardPage();
-        this.setContentPane(leaderBoardPage);
+        setPage(leaderBoardPage);
+    }
+
+    private void setPage(JPanel panel){
+        this.setContentPane(panel);
         this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        panel.requestFocus();
+        panel.setVisible(true);
     }
 
     public void addOptionPane(String message){

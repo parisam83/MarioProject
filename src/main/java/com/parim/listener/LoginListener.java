@@ -13,7 +13,7 @@ public class LoginListener implements FormListener{
             MainFrame.getInstance().unsuccessfulLoginError();
         else{
             MainFrame.setUser(user);
-            MainFrame.getInstance().setGamePage();
+            MainFrame.getInstance().setMenuPage();
         }
     }
 }
