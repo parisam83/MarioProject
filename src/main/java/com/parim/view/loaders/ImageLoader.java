@@ -12,7 +12,7 @@ public class ImageLoader {
     public ImageLoader(String name){
         {
             try {
-                picture = ImageIO.read(new File("src/main/resources/characters/" + name));
+                picture = ImageIO.read(new File("src/main/resources/" + name));
                 big = new ImageIcon(picture.getScaledInstance(400, 400, Image.SCALE_SMOOTH));
                 small = new ImageIcon(picture.getScaledInstance(190, 190, Image.SCALE_SMOOTH));
             } catch (IOException e) {
@@ -23,6 +23,9 @@ public class ImageLoader {
 
     public Image getPicture() {
         return picture;
+    }
+    public Image getScaledPicture(int width, int height){
+        return picture.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
     public ImageIcon getSmall() {
         return small;
