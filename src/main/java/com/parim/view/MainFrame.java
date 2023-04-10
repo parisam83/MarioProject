@@ -1,5 +1,7 @@
 package com.parim.view;
 
+import com.parim.controller.UserController;
+import com.parim.model.Character;
 import com.parim.model.Game;
 import com.parim.model.User;
 import com.parim.view.panels.*;
@@ -9,7 +11,7 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
     private static MainFrame instance;
-    private static User user;
+    private static User user = UserController.getAllUsersSorted().get(1);
     private FirstPage firstPage;
     private LoginPage loginPage;
     private RegisterPage registerPage;
@@ -85,7 +87,7 @@ public class MainFrame extends JFrame {
     }
 
     public void setGamePage(Game game){
-        gamePage = new GamePage(game);
+        gamePage = new GamePage(game, user);
         setPage(gamePage);
     }
 
