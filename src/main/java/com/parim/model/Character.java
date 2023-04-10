@@ -3,11 +3,11 @@ package com.parim.model;
 import com.parim.view.loaders.ImageLoader;
 
 public enum Character {
-    Xayyat(0, new ImageLoader("Xayyat.png")),
-    Frog(90, new ImageLoader("Frog.png")), // jump
-    MigMig(230, new ImageLoader("MigMig.png")), // fast
-    Woman(750, new ImageLoader("Woman.png")), // coin
-    RobinHood(410, new ImageLoader("RobinHood.png")) // shot
+    Xayyat(0, new ImageLoader("characters/Xayyat.png")),
+    Frog(90, new ImageLoader("characters/Frog.png")), // jump
+    MigMig(230, new ImageLoader("characters/MigMig.png")), // fast
+    Woman(750, new ImageLoader("characters/Woman.png")), // coin
+    RobinHood(410, new ImageLoader("characters/RobinHood.png")) // shot
     ;
 
     private final int price;
