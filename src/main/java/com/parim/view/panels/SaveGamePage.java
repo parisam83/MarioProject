@@ -18,9 +18,7 @@ public abstract class SaveGamePage extends JPanel {
     protected ArrayList<Game> savedGames;
     protected ArrayList<ButtonCreator> buttons = new ArrayList<ButtonCreator>(3){{add(null); add(null); add(null);}};
     public SaveGamePage(User user){
-        user.addGame(null, new Game(Character.MigMig));
         savedGames = user.getSavedGames();
-        System.out.println(savedGames);
         setLabel();
         this.add(label);
 
