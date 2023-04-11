@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class UserAccess {
-    private final String directory = "database";
+    private final String directory = "database/";
     private final File databaseFile = new File(directory);
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private ArrayList<User> users = new ArrayList<>();
@@ -18,7 +18,7 @@ public class UserAccess {
         for (int i = 1; i <= numberOfUsers(); i++) {
             FileReader reader;
             try {
-                reader = new FileReader(directory + "/user" + String.valueOf(i) + ".json");
+                reader = new FileReader(directory + "user" + String.valueOf(i) + ".json");
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -27,7 +27,7 @@ public class UserAccess {
     }
     public void add(User user){
         try {
-            FileWriter writer = new FileWriter(directory + "/user" + String.valueOf(user.getId()) + ".json");
+            FileWriter writer = new FileWriter(directory + "user" + String.valueOf(user.getId()) + ".json");
             gson.toJson(user, writer);
             writer.flush();
         } catch (IOException e) {
