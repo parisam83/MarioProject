@@ -1,7 +1,9 @@
 package com.parim.view.panels;
 
 import com.parim.model.Game;
-import com.parim.model.Tiling;
+import com.parim.model.Mario;
+import com.parim.model.Scene;
+import com.parim.model.Tiling.*;
 import com.parim.model.User;
 import com.parim.view.MainFrame;
 import com.parim.view.objects.gameObjects.*;
@@ -13,28 +15,37 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class GamePage extends JPanel implements Runnable{
-    private static final int width = MainFrame.getGameWidth(), height = MainFrame.getGameHeight(), objectSize = Tiling.getObjectSize();
-    private Mario graphicalMario;
-    private ArrayList<Floor> floors = new ArrayList<>();
-    private ArrayList<OrdinaryBlock> ordinaryBlocks = new ArrayList<>();
-    private ArrayList<PowerUpBlock> powerUpBlocks = new ArrayList<>();
-    private Pipe ordinaryPipe = new Pipe(20 - objectSize + objectSize*19 + 10, height - objectSize*3 + 40 - 100, objectSize*2, 100);
+    private static final int gameWidth = MainFrame.getGameWidth(), gameHeight = MainFrame.getGameHeight();
+    private Scene scene = new Scene();
+    // private Mario mario = scene.getMario();
+    // private ArrayList<Tile> gameObjects = scene.getGameObjects();
+
+    ArrayList<Tile> gameObjects = new ArrayList<>();
+    Mario mario;
+    // 380 452
     public GamePage(Game game, User user){
-
+        mario = new Mario(50, gameHeight - 3*60 - Mario.getSize() + 40, user.getCurrentCharacter());
         for (int i = 0; i < 30; i++){
-            floors.add(new Floor(20 - objectSize + objectSize*i, height - objectSize + 40));
-            floors.add(new Floor(20 - objectSize + objectSize*i, height - objectSize * 2 + 40));
-            floors.add(new Floor(20 - objectSize + objectSize*i, height - objectSize * 3 + 40));
+            gameObjects.add(new Floor(20 + 60*(i-1), gameHeight - 60 + 40));
+            gameObjects.add(new Floor(20 + 60*(i-1), gameHeight - 60 * 2 + 40));
+            gameObjects.add(new Floor(20 + 60*(i-1), gameHeight - 60 * 3 + 40));
         }
-        powerUpBlocks.add(new PowerUpBlock(20 - objectSize + objectSize*7, height - objectSize*7 + 40));
-        ordinaryBlocks.add(new OrdinaryBlock(20 - objectSize + objectSize*11, height - objectSize*7 + 40));
-        powerUpBlocks.add(new PowerUpBlock(20 - objectSize + objectSize*12, height - objectSize*7 + 40));
-        ordinaryBlocks.add(new OrdinaryBlock(20 - objectSize + objectSize*13, height - objectSize*7 + 40));
-        powerUpBlocks.add(new PowerUpBlock(20 - objectSize + objectSize*14, height - objectSize*7 + 40));
-        ordinaryBlocks.add(new OrdinaryBlock(20 - objectSize + objectSize*15, height - objectSize*7 + 40));
-        powerUpBlocks.add(new PowerUpBlock(20 - objectSize + objectSize*13, height - objectSize*11 + 40));
+        gameObjects.add(new OrdinaryBlock(20 - 60 + 60*7, gameHeight - 60*7 + 40));
+        gameObjects.add(new OrdinaryBlock(20 - 60 + 60*11, gameHeight - 60*7 + 40));
+        gameObjects.add(new OrdinaryBlock(20 - 60 + 60*12, gameHeight - 60*7 + 40));
+        gameObjects.add(new OrdinaryBlock(20 - 60 + 60*13, gameHeight - 60*7 + 40));
+        gameObjects.add(new OrdinaryBlock(20 - 60 + 60*14, gameHeight - 60*7 + 40));
+        gameObjects.add(new PowerUpBlock(20 - 60 + 60*15, gameHeight - 60*7 + 40));
+        gameObjects.add(new OrdinaryBlock(20 - 60 + 60*13, gameHeight - 60*11 + 40));
 
-        graphicalMario = new Mario(50, height - 3*objectSize - Tiling.getMarioSize() + 40, user.getCurrentCharacter());
+        gameObjects.add(new Pipe(20 - 60 + 60*19 + 10, gameHeight - 60*3 + 40 - 100, 60*2, 100));
+
+
+        /*for (Tile tile : gameObjects)
+            if (tile.getWidth() != 60 || tile.getHeight() != 60)
+                System.out.println(tile + " " + tile.getWidth() + " " + tile.getHeight());*/
+        scene.setMario(mario);
+        scene.setGameObjects(gameObjects);
 
         this.setFocusable(true);
         this.addKeyListener(new AL());
@@ -42,34 +53,24 @@ public class GamePage extends JPanel implements Runnable{
         this.setLayout(null);
         this.setPreferredSize(MainFrame.getScreenSize());
 
-        ArrayList<Object> arrayList = new ArrayList<>();
-        arrayList.add(ordinaryPipe);
-        arrayList.add(floors.get(0));
-
         Thread gameThread = new Thread(this);
         gameThread.start();
     }
 
     public void move(){
-        graphicalMario.move();
-        for (OrdinaryBlock ordinaryBlock : ordinaryBlocks)
-            ordinaryBlock.move();
-        for (PowerUpBlock powerUpBlock : powerUpBlocks)
-            powerUpBlock.move();
-        ordinaryPipe.move();
+        mario.move();
+        for (Tile gameObject : gameObjects)
+            gameObject.move();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        graphicalMario.draw(g);
-        for (Floor floor : floors)
-            floor.draw(g);
-        for (OrdinaryBlock ordinaryBlock : ordinaryBlocks)
-            ordinaryBlock.draw(g);
-        for (PowerUpBlock powerUpBlock : powerUpBlocks)
-            powerUpBlock.draw(g);
-        ordinaryPipe.draw(g);
+        g.drawRect(860, 452, 60, 60);
+        g.drawImage(GameObjectsImages.getImage(mario), mario.getX(), mario.getY(), Mario.getSize(), Mario.getSize(), null);
+        g.drawRect(mario.getX(), mario.getY(), Mario.getSize(), Mario.getSize());
+        for (Tile gameObject : gameObjects)
+            g.drawImage(GameObjectsImages.getImage(gameObject), gameObject.getX(), gameObject.getY(), gameObject.getWidth(), gameObject.getHeight(), null);
     }
 
     @Override
@@ -100,7 +101,9 @@ public class GamePage extends JPanel implements Runnable{
             else if (e.getKeyCode() == KeyEvent.VK_LEFT)
                 Mario.setXVelocity(-Mario.getSpeed());
             else if (e.getKeyCode() == KeyEvent.VK_UP)
-                Mario.setYVelocity(-Mario.getSpeed());
+                mario.setYVelocity(-Mario.getSpeed());
+            //else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            //    Mario.setYVelocity(Mario.getSpeed());
         }
 
         @Override
