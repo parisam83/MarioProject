@@ -4,9 +4,9 @@ public class Area {
     private int up, down, left, right;
     public Area(int x, int y, int width, int height){
         up = y;
-        down = y + width;
+        down = y + height;
         left = x;
-        right = x + height;
+        right = x + width;
     }
 
     public int getUp() {
