@@ -13,7 +13,7 @@ public abstract class Tile {
         this.y = y;
         this.directory = directory;
         width = height = 60;
-        this.area = new Area(x, y, width, height);
+        //this.area = new Area(x, y, width, height);
     }
     public Tile(int x, int y, int width, int height, String directory){
         this.x = x;
@@ -21,12 +21,11 @@ public abstract class Tile {
         this.width = width;
         this.height = height;
         this.directory = directory;
-        this.area = new Area(x, y, width, height);
+        //this.area = new Area(x, y, width, height);
     }
 
     public void move(){
         x -= Mario.getXVelocity();
-        area = new Area(x, y, width, height);
     }
 
     public int getX() {
@@ -38,6 +37,7 @@ public abstract class Tile {
     }
 
     public Area getArea() {
+        area = new Area(x, y, width, height);
         return area;
     }
 
