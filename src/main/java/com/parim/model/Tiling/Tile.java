@@ -1,8 +1,14 @@
+/*
+TODO:
+    Maybe it's good to divide move function into two functions moveX and moveY
+    Maybe it's good to implement intersect function in Tile.java to ba able to override for each game object
+*/
+
 package com.parim.model.Tiling;
 
 import com.parim.model.Mario;
 
-public abstract class Tile {
+public class Tile {
     protected int x, y;
     protected final int width, height;
     protected Area area;
