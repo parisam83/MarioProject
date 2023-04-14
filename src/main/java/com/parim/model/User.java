@@ -32,6 +32,10 @@ public class User {
     public void addCharacter(Character character){
         this.characters.add(character);
     }
+    public void addGame(int indexToDelete, Game gameToAdd){
+        if (indexToDelete >= 0 && indexToDelete < savedGames.size()) savedGames.remove(indexToDelete);
+        savedGames.add(gameToAdd);
+    }
     public void addGame(Game gameToDelete, Game gameToAdd){
         if (gameToDelete != null) savedGames.remove(gameToDelete);
         savedGames.add(gameToAdd);
