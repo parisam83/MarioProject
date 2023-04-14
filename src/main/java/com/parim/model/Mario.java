@@ -2,7 +2,7 @@ package com.parim.model;
 
 public class Mario {
     transient private Game game;
-    private int x, y, firstY, xDraw;
+    private int x, y, firstY;
     private static int xVelocity, yVelocity;
     private static final int speed = 8, diff = 240+20;
     private static final int size = 80;
@@ -10,11 +10,12 @@ public class Mario {
     private final Character character;
     private boolean gravity = false, jump = false, intersectDown = true;
     public Mario(int x, int y, Character character, Game game){
-        this.x = xDraw = x;
+        this.x = x;
         this.y = y;
         this.game = game;
         this.character = character;
         this.directory = "/characters/" + character.name() + ".png";
+        xVelocity = yVelocity = 0;
     }
 
     public void move(){
