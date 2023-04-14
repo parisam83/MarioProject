@@ -13,7 +13,7 @@ public class Game {
     private int sec = 0;
     private ArrayList<Tile> gameObjects = new GameObjects().getGameObjects();
     private int marioX = 150, marioY = 832 - 3 * 60 - Mario.getSize() + 40;
-    private int maxMarioX;
+    private int maxMarioX = 150;
 
     public Game(Character character){
         mario = new Mario(150, MainFrame.getGameHeight() - Mario.getSize() - 140, character, this);
