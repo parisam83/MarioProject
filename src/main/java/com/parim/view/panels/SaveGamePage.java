@@ -1,6 +1,5 @@
 package com.parim.view.panels;
 
-import com.parim.model.Character;
 import com.parim.model.Game;
 import com.parim.model.User;
 import com.parim.view.MainFrame;
@@ -19,12 +18,13 @@ public abstract class SaveGamePage extends JPanel {
     protected ArrayList<ButtonCreator> buttons = new ArrayList<ButtonCreator>(3){{add(null); add(null); add(null);}};
     public SaveGamePage(User user){
         savedGames = user.getSavedGames();
+        for (Game game : savedGames)
+            game.getMario().setGame(game);
         setLabel();
         this.add(label);
 
         for (int i = 0; i < savedGames.size(); i++) {
-            final int index = i;
-            ButtonCreator button = new ButtonCreator(buttonLabelGap + buttonGap * i, savedGames.get(i).getCurrentState(), false);
+            ButtonCreator button = new ButtonCreator(buttonLabelGap + buttonGap * i, savedGames.get(i).calculateState(), false);
             buttons.set(i, button);
             this.add(button);
         }
