@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class User {
     private final int id;
-    private  int maxScore, coins;
+    private int maxScore, coins;
     private String username, password;
     private Character currentCharacter = Character.Xayyat;
     private ArrayList<Game> savedGames = new ArrayList<>();
