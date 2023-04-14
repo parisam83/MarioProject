@@ -87,6 +87,7 @@ public class MainFrame extends JFrame {
 
     public void setGamePage(Game game){
         gamePage = new GamePage(game, user);
+        gamePage.startAgain();
         setPage(gamePage);
     }
 
