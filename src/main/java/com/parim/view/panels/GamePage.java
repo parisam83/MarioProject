@@ -36,9 +36,6 @@ public class GamePage extends JPanel implements Runnable{
         this.setBackground(new Color(107, 135, 254));
         this.setLayout(null);
         this.setPreferredSize(MainFrame.getScreenSize());
-
-        Thread gameThread = new Thread(this);
-        gameThread.start();
     }
 
     public void move(){
@@ -51,6 +48,14 @@ public class GamePage extends JPanel implements Runnable{
             else if (gameObject instanceof Plant)
                 gameObject.setY(gameObject.getY() + (((Time.getSec() / 2) % 2 == 0) ? (1) : (-1)));
         }
+    }
+
+    public void startAgain(){
+        System.out.println("start Again");
+        Time.setSec(game.getSec());
+        runningGame = true;
+        Thread gameThread = new Thread(this);
+        gameThread.start();
     }
 
     @Override
