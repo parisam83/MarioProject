@@ -1,8 +1,3 @@
-/*
-TODO:
-    Check why the velocity increases after one gameplay!
-
-*/
 package com.parim.view.panels;
 
 import com.parim.access.UserAccess;
@@ -25,12 +20,15 @@ public class GamePage extends JPanel implements Runnable{
     private int calculateSec = 0;
     private Game game;
     private User user;
+    private boolean runningGame = true;
     public GamePage(Game game, User user){
         Time.setSec(game.getSec());
         this.user = user;
         this.game = game;
         gameObjects = game.getGameObjects();
         mario = game.getMario();
+        Mario.setXVelocity(0);
+        mario.setYVelocity(0);
 
         this.setFocusable(true);
         this.addKeyListener(new AL());
@@ -44,7 +42,9 @@ public class GamePage extends JPanel implements Runnable{
     }
 
     public void move(){
+        //System.out.println(game.getMaxMarioX());
         mario.move();
+        //System.out.println("marioX: " + mario.getX());
         for (Tile gameObject : gameObjects) {
             if (mario.getX() - game.getMaxMarioX() >= 0)
                 gameObject.move();
@@ -77,7 +77,7 @@ public class GamePage extends JPanel implements Runnable{
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
-        while (true) {
+        while (runningGame) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -104,6 +104,7 @@ public class GamePage extends JPanel implements Runnable{
             else if (e.getKeyCode() == KeyEvent.VK_UP)
                 mario.setYVelocity(-Mario.getSpeed());
             else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                runningGame = false;
                 game.setSec(Time.getSec());
                 new UserAccess().add(user);
                 MainFrame.getInstance().setMenuPage();
