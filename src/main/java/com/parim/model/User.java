@@ -36,6 +36,9 @@ public class User {
         if (gameToDelete != null) savedGames.remove(gameToDelete);
         savedGames.add(gameToAdd);
     }
+    public Game getLastAddedGame(){
+        return savedGames.get(savedGames.size() - 1);
+    }
     public void addCoins(int coins){
         this.coins += coins;
     }
