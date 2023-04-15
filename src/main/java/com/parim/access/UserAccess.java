@@ -1,35 +1,38 @@
 package com.parim.access;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.parim.model.User;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class UserAccess {
+    ObjectMapper mapper;
     private final String directory = "database/";
     private final File databaseFile = new File(directory);
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private ArrayList<User> users = new ArrayList<>();
 
-    private void read(){
+    public UserAccess(){
+        mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+    public void read(){
         users.clear();
         for (int i = 1; i <= numberOfUsers(); i++) {
-            FileReader reader;
             try {
-                reader = new FileReader(directory + "user" + String.valueOf(i) + ".json");
-            } catch (FileNotFoundException e) {
+                File file1 = new File(directory + "user" + String.valueOf(i) + ".json");
+                User newUser = mapper.readValue(file1, User.class);
+                users.add(newUser);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            users.add(gson.fromJson(reader, User.class));
         }
     }
     public void add(User user){
+        users.add(user);
         try {
-            FileWriter writer = new FileWriter(directory + "user" + String.valueOf(user.getId()) + ".json");
-            gson.toJson(user, writer);
-            writer.flush();
+            mapper.writeValue(new FileWriter(directory + "user" + String.valueOf(user.getId()) + ".json"), user);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,7 +57,6 @@ public class UserAccess {
             return 0;
         return databaseFile.list().length;
     }
-
     public ArrayList<User> getUsers() {
         read();
         return users;
