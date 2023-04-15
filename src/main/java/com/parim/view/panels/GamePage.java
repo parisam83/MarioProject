@@ -1,8 +1,3 @@
-/*
-TODO:
-    Fix bug in calculating score of player after die
-    Fix bug of starting game position after die of mario
-*/
 package com.parim.view.panels;
 
 import com.parim.access.UserAccess;
@@ -44,11 +39,9 @@ public class GamePage extends JPanel implements Runnable{
     }
 
     public void move(){
-        //System.out.println(game.getMaxMarioX());
         mario.move();
-        //System.out.println("marioX: " + mario.getX());
         for (Tile gameObject : gameObjects) {
-            if (mario.getX() - game.getMaxMarioX() >= 0 && !(game.getMaxMarioX() >= 1500 * 7 + 150))
+            if (mario.getX() - game.getMaxMarioX() >= 0 /*&& !(game.getMaxMarioX() >= 1500 * 7 + 150)*/)
                 gameObject.move();
             else if (gameObject instanceof Plant) {
                 Plant plant = (Plant) gameObject;
@@ -73,12 +66,12 @@ public class GamePage extends JPanel implements Runnable{
 
         game.setMaxMarioX(Math.max(game.getMaxMarioX(), mario.getX()));
         int diff = mario.getX() - game.getMaxMarioX();
-        if (diff < -150){
+        if (/*mario.getX() < 7*1500 && */diff < -150){
             mario.setX(game.getMaxMarioX() - 150);
             diff = -150;
         }
-        if (game.getMaxMarioX() >= 1500*7 + 150) game.setMarioX(mario.getX() - 1500*7);
-        else game.setMarioX(150 + Math.min(0, diff));
+        /*if (game.getMaxMarioX() >= 1500*7 + 150) game.setMarioX(mario.getX() - 1500*7);
+        else*/ game.setMarioX(150 + Math.min(0, diff));
         g.drawImage(GameObjectsImages.getImage(mario), game.getMarioX(), mario.getY(), Mario.getSize(), Mario.getSize(), null);
         for (Tile gameObject : gameObjects)
             if (!(gameObject instanceof Coin) || ((Coin) gameObject).isVisible())
@@ -110,8 +103,7 @@ public class GamePage extends JPanel implements Runnable{
                 if (game.isGameEnded()){
                     runningGame = false;
                     user.addGame(game, null);
-                    user.addCoins(game.getTotalCoins());
-                    user.setMaxScore(game.getTotalScore());
+                    fixCoinsAndScore();
                 }
                 delta--;
             }
@@ -140,5 +132,10 @@ public class GamePage extends JPanel implements Runnable{
             if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_LEFT)
                 Mario.setXVelocity(0);
         }
+    }
+
+    public void fixCoinsAndScore(){
+        user.addCoins(game.getTotalCoins());
+        user.setMaxScore(game.getTotalScore());
     }
 }
