@@ -20,6 +20,8 @@ public class MainFrame extends JFrame {
     private NewGamePage newGamePage;
     private PreviousGamePage previousGamePage;
     private GamePage gamePage;
+    private WinGamePage winGamePage;
+    private LoseGamePage loseGamePage;
     private static final int gameWidth = 1500, gameHeight = 832;
     private static final Dimension screenSize = new Dimension(gameWidth, gameHeight);
 
@@ -91,6 +93,16 @@ public class MainFrame extends JFrame {
         setPage(gamePage);
     }
 
+    public void setWinGamePage() {
+        winGamePage = new WinGamePage();
+        setPage(winGamePage);
+    }
+
+    public void setLoseGamePage() {
+        loseGamePage = new LoseGamePage();
+        setPage(loseGamePage);
+    }
+
     private void setPage(JPanel panel){
         this.setContentPane(panel);
         this.pack();
@@ -115,6 +127,10 @@ public class MainFrame extends JFrame {
 
     public void unsuccessfulRegisterError(){
         JOptionPane.showMessageDialog(this, "This username is taken. Please try another username.", "UnsuccessfulRegisterError", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void chooseDifficultyOfGame(){
+        JOptionPane.showOptionDialog(this, "Choose difficulty of the game", "Difficulty", 0, 3, null, new String[]{"Easy", "Medium", "Hard"}, null);
     }
 
     public static int getGameWidth() {
