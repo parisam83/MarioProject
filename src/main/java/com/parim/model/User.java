@@ -38,7 +38,7 @@ public class User {
     }
     public void addGame(Game gameToDelete, Game gameToAdd){
         if (gameToDelete != null) savedGames.remove(gameToDelete);
-        savedGames.add(gameToAdd);
+        if (gameToAdd !=  null) savedGames.add(gameToAdd);
     }
     public Game getLastAddedGame(){
         return savedGames.get(savedGames.size() - 1);
