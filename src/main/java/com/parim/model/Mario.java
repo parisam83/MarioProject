@@ -1,7 +1,7 @@
 package com.parim.model;
 
 public class Mario {
-    transient private Game game;
+    private Game game;
     private int x, y, firstY;
     private static int xVelocity, yVelocity;
     private static final int speed = 8, diff = 240+20;
