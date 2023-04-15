@@ -117,11 +117,13 @@ public class Game {
         reduceHearts();
         setTotalCoins(0);
         setTotalScore(0);
+        lastSectionEnteringTime = Time.getSec();
+        lastSectionNumber = 1;
     }
 
     public void checkGameStatus(){
         gameEnded = true;
-        if (mario.getX() >= 1500*8)
+        if (mario.getX() >= 1500*8 - Mario.getSize())
             winGame();
         else if (hearts == 0)
             loseGame();
