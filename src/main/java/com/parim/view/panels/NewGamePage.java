@@ -13,7 +13,7 @@ public class NewGamePage extends SaveGamePage{
             buttons.get(i).addActionListener(e -> {
                 MainFrame.getInstance().chooseDifficultyOfGame();
                 user.addGame(index, new Game(user.getCurrentCharacter()));
-                MainFrame.getInstance().setGamePage(user.getLastAddedGame());
+                MainFrame.getInstance().setGamePage(user.GetLastAddedGame());
             });
         }
     }
