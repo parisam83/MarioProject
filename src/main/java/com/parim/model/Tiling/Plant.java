@@ -16,7 +16,6 @@ public class Plant extends Enemy{
             y--;
         if (numberOfCalls == 240) numberOfCalls = 0;
         numberOfCalls++;
-        //System.out.println(numberOfCalls + " : " + y);
     }
 
     public void setNumberOfCalls(int numberOfCalls) {
