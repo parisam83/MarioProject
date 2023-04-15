@@ -10,10 +10,20 @@ public class Plant extends Enemy{
     @Override
     public void move() {
         super.move();
-        numberOfCalls++;
-        if (((numberOfCalls/60) / 2) % 2 == 0)
+        if ((numberOfCalls/120) % 2 == 0)
             y++;
         else
             y--;
+        if (numberOfCalls == 240) numberOfCalls = 0;
+        numberOfCalls++;
+        //System.out.println(numberOfCalls + " : " + y);
+    }
+
+    public void updateNumberOfCalls() {
+        this.numberOfCalls++;
+    }
+
+    public int getNumberOfCalls() {
+        return numberOfCalls;
     }
 }
