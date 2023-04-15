@@ -32,7 +32,6 @@ public class GamePage extends JPanel implements Runnable{
 
         this.setFocusable(true);
         this.addKeyListener(new AL());
-        //this.setBackground(Color.white);
         this.setBackground(new Color(107, 135, 254));
         this.setLayout(null);
         this.setPreferredSize(MainFrame.getScreenSize());
@@ -41,7 +40,7 @@ public class GamePage extends JPanel implements Runnable{
     public void move(){
         mario.move();
         for (Tile gameObject : gameObjects) {
-            if (mario.getX() - game.getMaxMarioX() >= 0 /*&& !(game.getMaxMarioX() >= 1500 * 7 + 150)*/)
+            if (mario.getX() - game.getMaxMarioX() >= 0)
                 gameObject.move();
             else if (gameObject instanceof Plant) {
                 Plant plant = (Plant) gameObject;
@@ -52,7 +51,6 @@ public class GamePage extends JPanel implements Runnable{
     }
 
     public void startAgain(){
-        System.out.println("start Again");
         Time.setSec(game.getSec());
         runningGame = true;
         Thread gameThread = new Thread(this);
@@ -66,12 +64,11 @@ public class GamePage extends JPanel implements Runnable{
 
         game.setMaxMarioX(Math.max(game.getMaxMarioX(), mario.getX()));
         int diff = mario.getX() - game.getMaxMarioX();
-        if (/*mario.getX() < 7*1500 && */diff < -150){
+        if (diff < -150){
             mario.setX(game.getMaxMarioX() - 150);
             diff = -150;
         }
-        /*if (game.getMaxMarioX() >= 1500*7 + 150) game.setMarioX(mario.getX() - 1500*7);
-        else*/ game.setMarioX(150 + Math.min(0, diff));
+        game.setMarioX(150 + Math.min(0, diff));
         g.drawImage(GameObjectsImages.getImage(mario), game.getMarioX(), mario.getY(), Mario.getSize(), Mario.getSize(), null);
         for (Tile gameObject : gameObjects)
             if (!(gameObject instanceof Coin) || ((Coin) gameObject).isVisible())
