@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
     }
 
     public void setFirstPage(){
-        if (firstPage == null) firstPage = new FirstPage();
+        firstPage = new FirstPage();
         setPage(firstPage);
     }
 
@@ -67,8 +67,7 @@ public class MainFrame extends JFrame {
     }
 
     public void setShopPage(){
-        if (shopPage == null || shopPage.getUser() != user)
-            shopPage = new ShopPage(user);
+        shopPage = new ShopPage(user);
         setPage(shopPage);
     }
 
