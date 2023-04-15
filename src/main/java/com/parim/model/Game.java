@@ -10,10 +10,11 @@ public class Game {
     private Mario mario;
     private int hearts = 3;
     private int totalCoins = 0, totalScore = 0;
-    private int sec = 0;
+    private int sec = 0, lastSectionEnteringTime = 0, timeLimit = 40;
     private ArrayList<Tile> gameObjects = new GameObjects().getGameObjects();
     private int marioX = 150, marioY = 832 - 3 * 60 - Mario.getSize() + 40;
-    private int maxMarioX = 150;
+    private int maxMarioX = 150, lastSectionNumber = 1;
+    private boolean gameEnded = false;
 
     public Game(Character character){
         mario = new Mario(150, MainFrame.getGameHeight() - Mario.getSize() - 140, character, this);
@@ -90,6 +91,12 @@ public class Game {
         if (mario.getY() > MainFrame.getGameHeight())
             die();
     }
+    public void checkTime(){
+        if (Time.getSec() - lastSectionEnteringTime >= timeLimit) {
+            lastSectionEnteringTime = sec = Time.getSec();
+            die();
+        }
+    }
     public void updateCoinAndScore(int amount){
         addTotalCoins(amount);
         addTotalScore(10 * amount);
@@ -112,9 +119,23 @@ public class Game {
         setTotalScore(0);
     }
 
-    public void endGame(){
-        sec = Time.getSec();
+    public void checkGameStatus(){
+        gameEnded = true;
+        if (mario.getX() >= 1500*8)
+            winGame();
+        else if (hearts == 0)
+            loseGame();
+        else
+            gameEnded = false;
+    }
+    public void winGame(){
         Time.setSec(0);
+        MainFrame.getInstance().setWinGamePage();
+    }
+
+    public void loseGame(){
+        Time.setSec(0);
+        MainFrame.getInstance().setLoseGamePage();
     }
 
     public int getCurrentLevel(){
@@ -131,15 +152,18 @@ public class Game {
     public String calculateState(){
         int level = getCurrentLevel();
         int section = getCurrentSection();
+        if (section != lastSectionNumber){
+            totalScore += Math.max(0, timeLimit - Time.getSec() - lastSectionEnteringTime);
+            totalScore += hearts * 20;
+            lastSectionNumber = section;
+            lastSectionEnteringTime = sec = Time.getSec();
+        }
         int scene = getCurrentScene();
-
         return "" + level + "-" + section + "-" + scene;
     }
 
     public void reduceHearts() {
         hearts--;
-        if (hearts == 0)
-            endGame();
     }
     public void addTotalCoins(int amount) {
         this.totalCoins += amount;
@@ -206,5 +230,9 @@ public class Game {
 
     public void setMaxMarioX(int maxMarioX) {
         this.maxMarioX = maxMarioX;
+    }
+
+    public boolean isGameEnded() {
+        return gameEnded;
     }
 }
