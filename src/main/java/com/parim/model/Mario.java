@@ -1,14 +1,19 @@
 package com.parim.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Mario {
+    @JsonIgnore
     private Game game;
     private int x, y, firstY;
     private static int xVelocity, yVelocity;
-    private static final int speed = 8, diff = 240+20;
-    private static final int size = 80;
-    private final String directory;
-    private final Character character;
+    private static int speed = 8, diff = 240+20;
+    private static int size = 80;
+    private String directory;
+    private Character character;
     private boolean gravity = false, jump = false, intersectDown = true;
+
+    public Mario(){}
     public Mario(int x, int y, Character character, Game game){
         this.x = x;
         this.y = y;
@@ -115,5 +120,69 @@ public class Mario {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public int getFirstY() {
+        return firstY;
+    }
+
+    public void setFirstY(int firstY) {
+        this.firstY = firstY;
+    }
+
+    public static int getxVelocity() {
+        return xVelocity;
+    }
+
+    public static void setxVelocity(int xVelocity) {
+        Mario.xVelocity = xVelocity;
+    }
+
+    public static int getyVelocity() {
+        return yVelocity;
+    }
+
+    public static void setyVelocity(int yVelocity) {
+        Mario.yVelocity = yVelocity;
+    }
+
+    public String getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
+    public boolean isGravity() {
+        return gravity;
+    }
+
+    public void setGravity(boolean gravity) {
+        this.gravity = gravity;
+    }
+
+    public boolean isJump() {
+        return jump;
+    }
+
+    public void setJump(boolean jump) {
+        this.jump = jump;
+    }
+
+    public boolean isIntersectDown() {
+        return intersectDown;
+    }
+
+    public void setIntersectDown(boolean intersectDown) {
+        this.intersectDown = intersectDown;
     }
 }

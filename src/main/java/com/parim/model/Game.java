@@ -16,6 +16,7 @@ public class Game {
     private int maxMarioX = 150, lastSectionNumber = 1;
     private boolean gameEnded = false;
 
+    public Game(){}
     public Game(Character character){
         mario = new Mario(150, MainFrame.getGameHeight() - Mario.getSize() - 140, character, this);
     }
@@ -140,27 +141,27 @@ public class Game {
         MainFrame.getInstance().setLoseGamePage();
     }
 
-    public int getCurrentLevel(){
+    public int currentLevel(){
         return mario.getX()/(8*MainFrame.getGameWidth()) + 1;
     }
 
-    public int getCurrentSection(){
-        return mario.getX()/(4*MainFrame.getGameWidth()) + 1 - 2*(getCurrentLevel() - 1);
+    public int CurrentSection(){
+        return mario.getX()/(4*MainFrame.getGameWidth()) + 1 - 2*(currentLevel() - 1);
     }
 
-    public int getCurrentScene(){
-        return mario.getX()/(MainFrame.getGameWidth()) + 1 - 4*(getCurrentSection() - 1) - 8*(getCurrentLevel() - 1);
+    public int currentScene(){
+        return mario.getX()/(MainFrame.getGameWidth()) + 1 - 4*(CurrentSection() - 1) - 8*(currentLevel() - 1);
     }
     public String calculateState(){
-        int level = getCurrentLevel();
-        int section = getCurrentSection();
+        int level = currentLevel();
+        int section = CurrentSection();
         if (section != lastSectionNumber){
             totalScore += Math.max(0, timeLimit - Time.getSec() - lastSectionEnteringTime);
             totalScore += hearts * 20;
             lastSectionNumber = section;
             lastSectionEnteringTime = sec = Time.getSec();
         }
-        int scene = getCurrentScene();
+        int scene = currentScene();
         return "" + level + "-" + section + "-" + scene;
     }
 
@@ -236,5 +237,45 @@ public class Game {
 
     public boolean isGameEnded() {
         return gameEnded;
+    }
+
+    public int getLastSectionEnteringTime() {
+        return lastSectionEnteringTime;
+    }
+
+    public void setLastSectionEnteringTime(int lastSectionEnteringTime) {
+        this.lastSectionEnteringTime = lastSectionEnteringTime;
+    }
+
+    public int getTimeLimit() {
+        return timeLimit;
+    }
+
+    public void setTimeLimit(int timeLimit) {
+        this.timeLimit = timeLimit;
+    }
+
+    public void setGameObjects(ArrayList<Tile> gameObjects) {
+        this.gameObjects = gameObjects;
+    }
+
+    public int getMarioY() {
+        return marioY;
+    }
+
+    public void setMarioY(int marioY) {
+        this.marioY = marioY;
+    }
+
+    public int getLastSectionNumber() {
+        return lastSectionNumber;
+    }
+
+    public void setLastSectionNumber(int lastSectionNumber) {
+        this.lastSectionNumber = lastSectionNumber;
+    }
+
+    public void setGameEnded(boolean gameEnded) {
+        this.gameEnded = gameEnded;
     }
 }

@@ -6,14 +6,30 @@ TODO:
 
 package com.parim.model.Tiling;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.parim.model.Mario;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Stair.class, name = "Stair"),
+        @JsonSubTypes.Type(value = Block.class, name = "Block"),
+        @JsonSubTypes.Type(value = Pipe.class, name = "Pipe"),
+        @JsonSubTypes.Type(value = Floor.class, name = "Floor"),
+        @JsonSubTypes.Type(value = Enemy.class, name = "Enemy"),
+        @JsonSubTypes.Type(value = Coin.class, name = "Coin")
+})
 public class Tile {
     protected int x, y;
-    protected final int width, height;
+    protected int width, height;
+    @JsonIgnore
     protected Area area;
-    protected final String directory;
-
+    protected String directory;
+    public Tile(){}
     public Tile(int x, int y, String directory){
         this.x = x;
         this.y = y;
@@ -65,5 +81,21 @@ public class Tile {
 
     public String getDirectory() {
         return directory;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public void setDirectory(String directory) {
+        this.directory = directory;
     }
 }
