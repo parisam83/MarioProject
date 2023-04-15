@@ -73,6 +73,7 @@ public class MainFrame extends JFrame {
 
     public void setLeaderBoardPage(){
         leaderBoardPage = new LeaderBoardPage();
+        leaderBoardPage.addData();
         setPage(leaderBoardPage);
     }
 
