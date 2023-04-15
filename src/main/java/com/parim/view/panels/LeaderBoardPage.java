@@ -14,9 +14,10 @@ import java.awt.event.*;
 public class LeaderBoardPage extends JPanel {
     private String[] columnNames = {"Rank", "Username", "Max Score"};
     private final Object[][] users = LeaderBoardListener.getAllUsers();
+    private DefaultTableModel model;
 
     public LeaderBoardPage(){
-        DefaultTableModel model = new DefaultTableModel();
+        model = new DefaultTableModel();
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
 
@@ -34,16 +35,18 @@ public class LeaderBoardPage extends JPanel {
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         table.setDefaultRenderer(Object.class, centerRenderer);
 
-        for (String col : columnNames)
-            model.addColumn(col);
-        for (Object[] obj : users)
-            model.addRow(obj);
-
         this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Logs of previous games!", TitledBorder.CENTER, TitledBorder.TOP, FontLoader.buttonFont));
         this.setLayout(new BorderLayout());
         this.add(scrollPane);
         this.setPreferredSize(MainFrame.getScreenSize());
         this.addKeyListener(new AL());
+    }
+
+    public void addData(){
+        for (String col : columnNames)
+            model.addColumn(col);
+        for (Object[] obj : users)
+            model.addRow(obj);
     }
 
     public class AL extends KeyAdapter {
