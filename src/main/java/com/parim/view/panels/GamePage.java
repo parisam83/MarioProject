@@ -1,3 +1,8 @@
+/*
+TODO:
+    Fix bug in calculating score of player after die
+    Fix bug of starting game position after die of mario
+*/
 package com.parim.view.panels;
 
 import com.parim.access.UserAccess;
@@ -43,10 +48,13 @@ public class GamePage extends JPanel implements Runnable{
         mario.move();
         //System.out.println("marioX: " + mario.getX());
         for (Tile gameObject : gameObjects) {
-            if (mario.getX() - game.getMaxMarioX() >= 0)
+            if (mario.getX() - game.getMaxMarioX() >= 0 && !(game.getMaxMarioX() >= 1500 * 7 + 150))
                 gameObject.move();
-            else if (gameObject instanceof Plant)
-                gameObject.setY(gameObject.getY() + (((Time.getSec() / 2) % 2 == 0) ? (1) : (-1)));
+            else if (gameObject instanceof Plant) {
+                Plant plant = (Plant) gameObject;
+                gameObject.setY(gameObject.getY() + (((plant.getNumberOfCalls()/120) % 2 == 0) ? (1) : (-1)));
+                plant.updateNumberOfCalls();
+            }
         }
     }
 
@@ -69,8 +77,9 @@ public class GamePage extends JPanel implements Runnable{
             mario.setX(game.getMaxMarioX() - 150);
             diff = -150;
         }
-        game.setMarioX(150 + Math.min(0, diff));
-        g.drawImage(GameObjectsImages.getImage(mario), 150 + Math.min(0, diff), mario.getY(), Mario.getSize(), Mario.getSize(), null);
+        if (game.getMaxMarioX() >= 1500*7 + 150) game.setMarioX(mario.getX() - 1500*7);
+        else game.setMarioX(150 + Math.min(0, diff));
+        g.drawImage(GameObjectsImages.getImage(mario), game.getMarioX(), mario.getY(), Mario.getSize(), Mario.getSize(), null);
         for (Tile gameObject : gameObjects)
             if (!(gameObject instanceof Coin) || ((Coin) gameObject).isVisible())
                 g.drawImage(GameObjectsImages.getImage(gameObject), gameObject.getX(), gameObject.getY(), gameObject.getWidth(), gameObject.getHeight(), null);
@@ -88,12 +97,22 @@ public class GamePage extends JPanel implements Runnable{
             lastTime = now;
             if (delta >= 1) {
                 calculateSec++;
-                if (calculateSec % (int) amountOfTicks == 0)
+                if (calculateSec % (int) amountOfTicks == 0) {
                     Time.updateSec();
+                    game.setSec(Time.getSec());
+                }
                 repaint();
                 revalidate();
                 requestFocus();
+                game.checkTime();
+                game.checkGameStatus();
                 move();
+                if (game.isGameEnded()){
+                    runningGame = false;
+                    user.addGame(game, null);
+                    user.addCoins(game.getTotalCoins());
+                    user.setMaxScore(game.getTotalScore());
+                }
                 delta--;
             }
         }
